@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Game</title>
+    <style>
+        input {
+            margin: 5px;
+        }
+
+        button {
+            margin: 5px;
+        }
+
+        #table1 #table1 #table3 {
+            padding: 10px;
+        }
+
+        tr td {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="inputform">
+        <input type="text" placeholder="Enter for first" id="table1input" name="table1input">
+        <input type="text" placeholder="Enter for second" id="table2input" name="table2input">
+        <br>
+        <button type="submit" id="generate">Submit</button>
+    </form>
+    <h1>Table-1</h1>
+    <div id="table1"></div>
+    <br>
+    <h1>Table-2</h1>
+    <div id="table2"></div>
+    <br>
+    <h1>Table-3</h1>
+    <div id="table3"></div>
+    <script>
+        function multiply(mat1, mat2) {
+            var mat = new Array(mat1.length);
+            for (let i = 0; i < mat1.length; i++) {
+                mat[i] = new Array(mat1[0].length);
+                for (let j = 0; j < mat1[0].length; j++) {
+                    mat[i][j] = mat1[i][j] * mat2[i][j];
+                }
+            }
+            return mat;
+        }
+
+        function genmat(r, c, val) {
+            let mat = new Array(r);
+            for (let i = 0; i < r; i++) {
+                mat[i] = new Array(c);
+                for (let j = 0; j < c; j++) {
+                    mat[i][j] = (i + 1) * (val + j);
+                }
+            }
+            return mat;
+        }
+
+        function createTable(id, mat) {
+            var result = '<table border="1px">';
+            for (let i = 0; i < mat.length; i++) {
+                result = result + '<tr>';
+                for (let j = 0; j < mat[0].length; j++) {
+                    result = result + '<td>' + mat[i][j] + '</td>'
+                }
+                result = result + '</tr>';
+            }
+            result = result + '</table>'
+            document.getElementById(id).innerHTML = result;
+        }
+
+        function getRandomColor() {
+            var color = '#';
+            var letters = '01234567889ABCDEF';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)]
+            }
+            return color;
+        }
+
+        function createresult(id, mat) {
+            var result = '<table border="1px">';
+            let a = [];
+            for (let i = 0; i < mat.length; i++) {
+                result = result + '<tr>';
+                for (let j = 0; j < mat[0].length; j++) {
+                    let cellValue = mat[i][j];
+                    let cellBackgroundColor = a.includes(cellValue) ? getRandomColor() : 'white';
+                    a.push(cellValue);
+
+                    result = result + '<td style="background-color:' + cellBackgroundColor + '">' + cellValue + '</td>';
+                }
+                result = result + '</tr>';
+            }
+            result = result + '</table>'
+            document.getElementById(id).innerHTML = result;
+        }
+
+        document.getElementById("generate").onclick = function () {
+            var t1 = document.forms['inputform']['table1input'].value;
+            var t2 = document.forms['inputform']['table2input'].value;
+
+            var grid1 = t1.split('#').map((ele) => parseInt(ele));
+            var grid2 = t2.split('#').map((ele) => parseInt(ele));
+
+            var mat1 = genmat(grid1[0], grid1[1], grid1[2]);
+            var mat2 = genmat(grid2[0], grid2[1], grid2[2]);
+
+            var mat3 = [];
+            if (mat1[0][0] === mat2[0][0]) {
+                mat3 = mat2;
+            } else {
+                mat3 = multiply(mat1, mat2);
+            }
+
+            console.log(mat1);
+            console.log(mat2);
+            console.log(mat3);
+
+            createTable("table1", mat1);
+            createTable("table2", mat2);
+            createresult("table3", mat3);
+            return false;
+        }
+    </script>
+</body>
+
+</html>

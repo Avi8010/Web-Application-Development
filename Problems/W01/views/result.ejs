@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Database</title>
+</head>
+
+<body>
+    <h1>Student Database</h1>
+
+    <h2>Total Count of Documents</h2>
+    <div id="totalCount"></div>
+
+    <h2>All Documents</h2>
+    <div id="allDocuments"></div>
+
+    <h2>Students with More than 20 Marks in DSBDA</h2>
+    <div id="moreThan20DSBDA"></div>
+
+    <h2>Update Marks</h2>
+    <button id="updateMarksBtn">Update Marks</button>
+
+    <h2>Students with More than 25 Marks in All Subjects</h2>
+    <div id="moreThan25AllSubjects"></div>
+</body>
+<script>
+    // Fetch the total count of documents and list all documents
+    const metadata = [];
+    fetch('/students')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('totalCount').innerHTML = data;
+        });
+
+    fetch('/studentsall')
+        .then(response => response.json())
+        .then(data => {
+            const allDocuments = data.map(doc => JSON.stringify(doc));
+            document.getElementById('allDocuments').innerHTML = allDocuments.join('<br>');
+        });
+
+
+    // Fetch students with more than 20 marks in DSBDA
+    fetch('/dsbda20')
+        .then(response => response.json())
+        .then(data => {
+            const moreThan20DSBDA = data.map(doc => JSON.stringify(doc));
+            document.getElementById('moreThan20DSBDA').innerHTML = moreThan20DSBDA.join('<br>');
+        });
+
+    // Update marks
+    document.getElementById('updateMarksBtn').addEventListener('click', () => {
+        fetch('/students/update-marks', {
+                method: 'PUT'
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            });
+    });
+
+    // Fetch students with more than 25 marks in all subjects
+    fetch('/students/more-than-25-all-subjects')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('moreThan25AllSubjects').innerHTML = data;
+        });
+</script>
+
+</html>

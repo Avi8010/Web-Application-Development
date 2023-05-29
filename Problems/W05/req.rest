@@ -1,0 +1,15 @@
+POST http://localhost:3000/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "songname": "abc",
+    "Film": "xy",
+    "Music_director": "noo",
+    "singer": "aaa"
+}
+
+###
+GET http://localhost:3000/count HTTP/1.1
+
+###
+GET http://localhost:3000/getSongsOfDirector/noo HTTP/1.1

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="formstyle.css">
+    <style>
+        td {
+            background-color: aqua;
+        }
+
+        th {
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <table border="1">
+        <form>
+            <tr>
+                <th colspan="2" style="text-align: center;">User Form</th>
+            </tr>
+            <tr>
+                <td>Enter Name</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>Enter Password</td>
+                <td><input type="password"></td>
+            </tr>
+            <tr>
+                <td>Enter Address</td>
+                <td><textarea></textarea></td>
+            </tr>
+            <tr>
+                <td>select Game</td>
+                <td>
+                    <input type="checkbox">Hockey<br>
+                    <input type="checkbox">Football<br>
+                    <input type="checkbox">Badminton<br>
+                    <input type="checkbox">Cricket<br>
+                    <input type="checkbox">Vollyball
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio"><label>Male</label>
+                    <input type="radio"><label>Female</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Select ur age</td>
+                <td><select style="width:100%" id="age" placeholder="Select" name="age"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input style="width:100%" type="file">
+                </td>
+            </tr>
+            <tr style="text-align: center;">
+                <td colspan="2"><button type="button">Click me</button>
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit Form</button></td>
+            </tr>
+
+        </form>
+    </table>
+
+</body>
+
+</html>
